@@ -4,9 +4,9 @@
   "description": "这是铁树的知识博客",
   "icons": [
     {
-      "src": "/favicon.ico",
-      "type": "image/ico",
-      "sizes": "144*144"
+      "src": "/avatar.png",
+      "type": "image/png",
+      "sizes": "144x144"
     }
   ],
   "background_color": "#2196f3",

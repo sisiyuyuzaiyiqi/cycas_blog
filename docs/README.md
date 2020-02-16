@@ -1,9 +1,9 @@
 ---
-title: 欢迎！
+title: 欢迎
 lang: zn
 home: true
-# heroImage: /favicon.ico
-heroText: 欢迎!
+heroImage: /avatar.png
+heroText: 欢迎
 tagline: 这是铁树的知识博客
 actionText: Who am I
 actionLink: /about.md

@@ -11,6 +11,20 @@ module.exports = {
     ["link", { rel: "icon", href: "/favicon.ico" }],
     ["link", { rel: "manifest", href: "/manifest.json" }]
   ],
+  plugins: [
+    [
+      "@vuepress/pwa",
+      {
+        serviceWorker: true,
+        //指向自定义组件
+        popupComponent: "MySWUpdatePopup",
+        updatePopup: {
+          message: "发现新的内容",
+          buttonText: "刷新～"
+        }
+      }
+    ]
+  ],
   themeConfig: {
     lastUpdated: "上次更新",
     repo: "sisiyuyuzaiyiqi/cycas_blog",
@@ -20,16 +34,8 @@ module.exports = {
     nav: [
       { text: "主页", link: "/" },
       { text: "coding心得", link: "/coding/" },
+      { text: "翻译", link: "/translation/" },
       { text: "文摘", link: "/digest/" }
     ]
-  },
-  plugins: {
-    "@vuepress/pwa": {
-      serviceWorker: true,
-      updatePopup: {
-        message: "有新的内容！",
-        buttonText: "刷新"
-      }
-    }
   }
 };
