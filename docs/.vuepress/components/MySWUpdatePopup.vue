@@ -30,7 +30,7 @@ export default {
 
 .my-sw-update-popup button {
   border: 1px solid #fefefe;
-  border-radius: 30%;
+  border-radius: 3px;
   background: #6495ed;
 }
 </style>
