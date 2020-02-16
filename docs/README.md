@@ -5,7 +5,7 @@ home: true
 # heroImage: /favicon.ico
 heroText: 欢迎!
 tagline: 这是铁树的知识博客
-actionText: 铁树
+actionText: Who am I
 actionLink: /about.md
 # features:
 #   - title: 简洁至上
@@ -17,4 +17,6 @@ actionLink: /about.md
 footer: MIT Licensed | Copyright © 2020-present Cycas
 ---
 
-首先缅怀一下旧博客，应该是再也看不到他了...
+首先缅怀一下旧博客，应该是再也看不到他了...[纪念碑](monument.md)
+
+本博客采用[VuePress](https://vuepress.vuejs.org/zh/)搭建，另外感谢 bilibili 大神“飞越高山与大洋的鱼”的[视频教程](https://www.bilibili.com/video/av43316513?p=1)。
