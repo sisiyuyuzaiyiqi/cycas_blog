@@ -10,21 +10,33 @@ tags: [Web, d3]
 
 ```json
 {
-	"name": "flare",
-	"children": [
-		{
-			"name": "btn1",
-			"children": [{ "name": "btn1-1", "value": 1 }, { "name": "btn1-2", "value": 1 }, { "name": "btn1-3", "value": 1 }]
-		},
-		{
-			"name": "btn2",
-			"children": [{ "name": "btn2-1", "value": 1 }, { "name": "btn2-2", "value": 1 }, { "name": "btn2-3", "value": 1 }]
-		},
-		{
-			"name": "btn3",
-			"children": [{ "name": "btn3-1", "value": 1 }, { "name": "btn3-2", "value": 1 }, { "name": "btn3-3", "value": 1 }]
-		}
-	]
+  "name": "flare",
+  "children": [
+    {
+      "name": "btn1",
+      "children": [
+        { "name": "btn1-1", "value": 1 },
+        { "name": "btn1-2", "value": 1 },
+        { "name": "btn1-3", "value": 1 }
+      ]
+    },
+    {
+      "name": "btn2",
+      "children": [
+        { "name": "btn2-1", "value": 1 },
+        { "name": "btn2-2", "value": 1 },
+        { "name": "btn2-3", "value": 1 }
+      ]
+    },
+    {
+      "name": "btn3",
+      "children": [
+        { "name": "btn3-1", "value": 1 },
+        { "name": "btn3-2", "value": 1 },
+        { "name": "btn3-3", "value": 1 }
+      ]
+    }
+  ]
 }
 ```
 
@@ -32,9 +44,9 @@ tags: [Web, d3]
 
 ```js
 const root = d3
-	.hierarchy(this.div_data)
-	.sum(d => d.value)
-	.sort((a, b) => b.value - a.value);
+  .hierarchy(this.div_data)
+  .sum(d => d.value)
+  .sort((a, b) => b.value - a.value);
 const div_data_root = d3.partition().size([2 * Math.PI, root.height + 1])(root);
 const div_data_root_des = div_data_root.descendants().slice(1);
 ```
@@ -49,42 +61,42 @@ const div_data_root_des = div_data_root.descendants().slice(1);
 
 每个 Node 的结构是这样的：
 
-<img src="https://wangyu.net.cn/img/d3_btn_pannel_1.PNG" width="210">
+![An Image](../illustrations/d3-sunburst-one.png)
 
 可以看到，d3 帮你做了很多工作。为你确定了 depth、x0、x1、y0、y1 等属性。实际上，这些参数是用来绘制层级图的。但是到目前为止还不够，我们还需要进一步改造数据，以符合我们要绘制的光晕图效果。不过这个就要在结合在绘制的过程中做了。接下来，我们就开始绘制按钮盘。
 
 首先确定圆心的位置：
 
 ```js
-const g = this.svg.append('g').attr('transform', `translate(${x},${y})`);
+const g = this.svg.append("g").attr("transform", `translate(${x},${y})`);
 ```
 
 接下来绘制每个按钮：
 
 ```js
 const path = g
-	.append('g')
-	.selectAll('path')
-	.data(div_data_root_des)
-	.join('path')
-	.attr('fill', '#409EFF')
-	.attr('fill-opacity', d => (initArcVisible(d) ? 1 : 0))
-	.attr('d', d => {
-		return arc(d);
-	});
+  .append("g")
+  .selectAll("path")
+  .data(div_data_root_des)
+  .join("path")
+  .attr("fill", "#409EFF")
+  .attr("fill-opacity", d => (initArcVisible(d) ? 1 : 0))
+  .attr("d", d => {
+    return arc(d);
+  });
 
 var arc = d3
-	.arc()
-	.startAngle(d => d.x0)
-	.endAngle(d => d.x1)
-	.padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
-	.padRadius(radius * 1.5)
-	.innerRadius(d => d.y0 * radius)
-	.outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1));
+  .arc()
+  .startAngle(d => d.x0)
+  .endAngle(d => d.x1)
+  .padAngle(d => Math.min((d.x1 - d.x0) / 2, 0.005))
+  .padRadius(radius * 1.5)
+  .innerRadius(d => d.y0 * radius)
+  .outerRadius(d => Math.max(d.y0 * radius, d.y1 * radius - 1));
 
 function initArcVisible(d) {
-	if (d.depth == 1) return true;
-	else return false;
+  if (d.depth == 1) return true;
+  else return false;
 }
 ```
 
@@ -94,63 +106,63 @@ function initArcVisible(d) {
 
 ```js
 path
-	.filter(d => d.children)
-	.style('cursor', 'pointer')
-	.on('click', firstClassBtnClick);
+  .filter(d => d.children)
+  .style("cursor", "pointer")
+  .on("click", firstClassBtnClick);
 
 function firstClassBtnClick(p) {
-	let select_btn = p.data.name;
-	path.attr('fill-opacity', d => (changeArcVisible(d, select_btn) ? 1 : 0));
+  let select_btn = p.data.name;
+  path.attr("fill-opacity", d => (changeArcVisible(d, select_btn) ? 1 : 0));
 }
 
 function changeArcVisible(d, select_btn) {
-	if (d.depth == 2) {
-		if (d.parent.data.name == select_btn) return true;
-		else return false;
-	} else {
-		return true;
-	}
+  if (d.depth == 2) {
+    if (d.parent.data.name == select_btn) return true;
+    else return false;
+  } else {
+    return true;
+  }
 }
 ```
 
 最后我们给点击目标添加一个点击事件，来关闭按钮盘：
 
 ```js
-g.append('circle')
-	.datum(div_data_root)
-	.attr('r', radius)
-	.attr('fill', 'none')
-	.attr('pointer-events', 'all')
-	.on('click', cancelClick);
+g.append("circle")
+  .datum(div_data_root)
+  .attr("r", radius)
+  .attr("fill", "none")
+  .attr("pointer-events", "all")
+  .on("click", cancelClick);
 
 function cancelClick(e) {
-	g.remove();
+  g.remove();
 }
 ```
 
 至此按钮盘我们就弄好了，当然，我们还要往上面添加图标，这个后面再补充吧。现在我们想让整个按钮盘是在右键目标后出现，代码如下：
 
 ```js
-this.svg = d3.select(this.$refs.cus2_btn_container).append('svg');
-this.svg.attr('viewBox', [0, 0, 320, 320]);
+this.svg = d3.select(this.$refs.cus2_btn_container).append("svg");
+this.svg.attr("viewBox", [0, 0, 320, 320]);
 // 初始化各节点的g标签容器
 this.nodes = this.svg
-	.selectAll('g')
-	.data(this.nodes_data)
-	.enter()
-	.append('g')
-	.attr('transform', function(d) {
-		return 'translate(' + d.x + ',' + d.y + ')';
-	});
+  .selectAll("g")
+  .data(this.nodes_data)
+  .enter()
+  .append("g")
+  .attr("transform", function(d) {
+    return "translate(" + d.x + "," + d.y + ")";
+  });
 // 添加圆形背景
 this.nodes
-	.append('circle')
-	.attr('class', 'node')
-	.attr('r', 10);
+  .append("circle")
+  .attr("class", "node")
+  .attr("r", 10);
 
 let that = this;
-this.nodes.on('auxclick', function(e) {
-	that.handleOpenDivDisk(e.x, e.y);
+this.nodes.on("auxclick", function(e) {
+  that.handleOpenDivDisk(e.x, e.y);
 });
 ```
 
