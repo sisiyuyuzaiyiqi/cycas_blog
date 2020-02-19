@@ -1,8 +1,10 @@
 ---
 title: svg图标管理程序开发手记
 date: 2019-7-11 19:33:00
-tags: [Electron, Web]
+tags: ["Electron", "Web"]
 ---
+
+<TagLinks />
 
 记录一下最近自己做一个小项目的过程。
 
@@ -21,15 +23,15 @@ tags: [Electron, Web]
 
 ```js
 var isElement = function isElement(obj) {
-	if (obj instanceof HTMLElement || obj instanceof SVGElement) {
-		return true;
-	} else {
-		if (Object.prototype.toString.call(obj) == '[object SVGSVGElement]') {
-			return true;
-		} else {
-			return false;
-		}
-	}
+  if (obj instanceof HTMLElement || obj instanceof SVGElement) {
+    return true;
+  } else {
+    if (Object.prototype.toString.call(obj) == "[object SVGSVGElement]") {
+      return true;
+    } else {
+      return false;
+    }
+  }
 };
 ```
 
@@ -42,7 +44,7 @@ var isElement = function isElement(obj) {
 需要修改`.electron-vue/build.js`，将下面这行注释掉：
 
 ```js
-del.sync(['dist/electron/*', '!.gitkeep']);
+del.sync(["dist/electron/*", "!.gitkeep"]);
 ```
 
 再手动把`static`文件夹复制到`dist/electron`目录下，即可解决了此问题。
@@ -51,10 +53,10 @@ del.sync(['dist/electron/*', '!.gitkeep']);
 
 ### fs.copyFile 报‘is not a function’ 错误
 
-这是因为默认安装的electron包版本过低，`fs.copyFile`是node8.5以后新增的API。单独卸载后指定安装此版本：
+这是因为默认安装的 electron 包版本过低，`fs.copyFile`是 node8.5 以后新增的 API。单独卸载后指定安装此版本：
 
 ```shell
 npm install electron@3.1.12 --save-dev
 ```
 
-不要直接安装latest的版本，再往后的版本就不兼容了。
+不要直接安装 latest 的版本，再往后的版本就不兼容了。
