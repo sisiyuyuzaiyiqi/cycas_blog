@@ -61,7 +61,7 @@ const div_data_root_des = div_data_root.descendants().slice(1);
 
 每个 Node 的结构是这样的：
 
-![An Image](../illustrations/d3-sunburst-one.png)
+![d3-sunburst-one](../illustrations/d3-sunburst-one.png)
 
 可以看到，d3 帮你做了很多工作。为你确定了 depth、x0、x1、y0、y1 等属性。实际上，这些参数是用来绘制层级图的。但是到目前为止还不够，我们还需要进一步改造数据，以符合我们要绘制的光晕图效果。不过这个就要在结合在绘制的过程中做了。接下来，我们就开始绘制按钮盘。
 
