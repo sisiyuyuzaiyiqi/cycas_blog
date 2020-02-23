@@ -1,8 +1,11 @@
 ---
 title: d3：sunburst形式的按钮盘控件实现
-date: 2019-6-26 11:50:53
+date: 2019-6-26 11:50
 tags: [Web, d3]
 ---
+
+<CreateTime/>
+<TagLinks />
 
 今天开个坑，记录一下自己用 d3 写的一个控件的实现过程。
 

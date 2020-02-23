@@ -1,8 +1,11 @@
 ---
 title: npm学习
-date: 2019-3-21 13:33:33
+date: 2019-3-21 13:33
 tags: [Web]
 ---
+
+<CreateTime/>
+<TagLinks />
 
 ### 初始化
 

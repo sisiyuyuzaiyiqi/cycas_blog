@@ -1,9 +1,10 @@
 ---
 title: svg图标管理程序开发手记
-date: 2019-7-11 19:33:00
+date: 2019-7-11 19:33
 tags: ["Electron", "Web"]
 ---
 
+<CreateTime/>
 <TagLinks />
 
 记录一下最近自己做一个小项目的过程。
