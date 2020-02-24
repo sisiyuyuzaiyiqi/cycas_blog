@@ -1,7 +1,7 @@
 ---
-title: Mac配置C/C++开发环境（VScode）
+title: Mac配置C和C++开发环境（VScode）
 date: 2020-2-8 21:08
-tags: [C/C++, 开发环境]
+tags: [C和Cpp, 开发环境]
 ---
 
 <CreateTime/>

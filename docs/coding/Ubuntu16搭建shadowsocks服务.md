@@ -1,7 +1,7 @@
 ---
 title: Ubuntu16搭建shadowsocks服务
 date: 2018-9-1 10:16
-tags: [linux]
+tags: [Linux]
 ---
 
 <CreateTime/>
