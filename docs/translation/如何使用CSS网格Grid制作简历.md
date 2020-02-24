@@ -1,7 +1,7 @@
 ---
 title: 如何使用CSS网格Grid制作简历
 date: 2020-2-24 16:53
-tags: [翻译, Electron]
+tags: [翻译, CSS, Web]
 ---
 
 <CreateTime/>
