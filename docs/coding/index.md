@@ -1,4 +1,5 @@
 <!-- [C 语言学习笔记](C语言学习笔记.md) -->
+
 <!-- 2020-2-8 -->
 
 [Mac 在 VScode 中配置 C、C++开发环境](Mac在VScode中配置C、C++开发环境.md)
@@ -22,3 +23,7 @@
 <!-- 2019-3-21 -->
 
 [npm 学习](npm学习.md)
+
+<!-- 2018-9-1 -->
+
+[Ubuntu16 搭建 shadowsocks 服务](Ubuntu16搭建shadowsocks服务.md)
