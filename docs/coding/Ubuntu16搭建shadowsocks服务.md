@@ -58,4 +58,63 @@ sudo nano /etc/shadowsocks/config.json
 }
 ```
 
-然后按 Ctrl + O 保存文件，Ctrl + X 退出。
+然后按 `Ctrl + O` 保存文件，`Ctrl + X` 退出。
+
+## 测试 Shadowsocks 配置
+
+首先记录下服务器的 IP 地址
+
+```bash
+ifconfig
+```
+
+找到 IPv4 地址记下。
+
+测试下 Shadowsocks 能不能正常工作：
+
+```bash
+ssserver -c /etc/shadowsocks/config.json
+```
+
+在 Shadowsocks 客户端添加服务器，地址填写 `IPv4` 地址，端口号为 `8388`，加密方法为 `aes-256-cfb`，密码为设置的密码。然后设置客户端使用全局模式，浏览器登录 Google 试试应该能直接打开了。
+
+这时浏览器登录`http://ip138.com/`就会显示 Shadowsocks 服务器的 IP 啦！
+
+测试完毕，按 `Ctrl + C` 关闭 Shadowsocks。
+
+## 配置 Systemd 管理 Shadowsocks
+
+新建 Shadowsocks 管理文件:
+
+```bash
+sudo nano /etc/systemd/system/shadowsocks-server.service
+```
+
+```
+[Unit]
+Description=Shadowsocks Server
+After=network.target
+
+[Service]
+ExecStart=/usr/local/bin/ssserver -c /etc/shadowsocks/config.json
+Restart=on-abort
+
+[Install]
+WantedBy=multi-user.target
+```
+
+`Ctrl + O`保存文件，`Ctrl + X`退出。
+
+启动 Shadowsocks：
+
+```bash
+sudo systemctl start shadowsocks-server
+```
+
+设置开机启动 Shadowsocks：
+
+```bash
+sudo systemctl enable shadowsocks-server
+```
+
+至此，Shadowsock 服务器端的基本配置已经全部完成了。
