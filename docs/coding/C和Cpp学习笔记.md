@@ -57,7 +57,7 @@ tags: [C和Cpp]
 #include <iomanip>
 #include <ios>　　　　　　//基本输入／输出支持
 #include<iosfwd>　　　　　//输入／输出系统使用的前置声明
-#include <iostream>
+#include <iostream>     //数据流输入／输出
 #include <istream>　　　　 //基本输入流
 #include <ostream>　　　　 //基本输出流
 #include <queue>　　　　　 //STL队列容器
