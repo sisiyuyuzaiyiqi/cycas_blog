@@ -86,6 +86,14 @@ using namespace std;
 #include <tgmath.h>　　　//通用类型数学宏
 ```
 
+## include "" 与<>的区别
+
+`#include<>`直接从编译器自带的函数库中寻找文件。
+
+`#include""`是先从自定义的文件中找 ，如果找不到在从函数库中寻找文件。
+
+如果是自己写的头文件 建议使用`#include""`。
+
 ## EOF 的输入
 
 EOF 是一个计算机术语，为 End Of File 的缩写。

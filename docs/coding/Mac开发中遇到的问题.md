@@ -21,6 +21,8 @@ npm install 的时候，若包 fsevent 安装报错，显示找不到 CLT，去�
 ls -a
 ```
 
+访达中显示，快捷键：`cmd`+`shift`+`.`
+
 ### homebrew 的使用
 
 安装软件，例：
