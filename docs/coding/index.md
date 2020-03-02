@@ -39,3 +39,7 @@
 <!-- 2018-9-1 -->
 
 [Ubuntu16 搭建 shadowsocks 服务](Ubuntu16搭建shadowsocks服务.md)
+
+<!-- 2018-6-6 -->
+
+[Ubuntu 常用操作及命令](Ubuntu常用操作及命令.md)
