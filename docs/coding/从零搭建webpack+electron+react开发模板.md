@@ -39,6 +39,10 @@ _TODO_
 
 ## 集成`React`、`TypeScript`、`Electron`
 
+### 模板文件
+
+`default_index.ejs`用于 webpack 插件`HtmlWebpackPlugin`每次编译在`dist`文件夹生成新的 `index.html`
+
 _TODO_
 
 ## 构建开发模式

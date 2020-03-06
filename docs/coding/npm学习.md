@@ -78,3 +78,10 @@ npm config set registry https://registry.npm.taobao.org/
 ```shell
 npm config get registry
 ```
+
+使用阿里源的 electron 需要额外配置：
+
+```shell
+npm config set ELECTRON_MIRROR "https://npm.taobao.org/mirrors/electron/"
+npm config set ELECTRON_CUSTOM_DIR "8.0.3"
+```
