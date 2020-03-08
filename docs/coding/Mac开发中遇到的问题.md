@@ -37,7 +37,7 @@ brew install wget
 brew list
 ```
 
-### Chrome 禁止读取本地文件的策略
+## Chrome 禁止读取本地文件的策略
 
 打开一些 demo 项目时（比如 d3），有些项目会读取本地的模拟数据以展示界面及功能，这时如果直接用 Chrome 打开入口 html 文件会报错：
 
