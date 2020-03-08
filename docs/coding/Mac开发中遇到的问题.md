@@ -36,3 +36,17 @@ brew install wget
 ```bash
 brew list
 ```
+
+### Chrome 禁止读取本地文件的策略
+
+打开一些 demo 项目时（比如 d3），有些项目会读取本地的模拟数据以展示界面及功能，这时如果直接用 Chrome 打开入口 html 文件会报错：
+
+Access to XMLHttpRequest at 'file:///...' from origin 'null' has been blocked by CORS policy: Cross origin requests are only supported for protocol schemes: http, data, chrome, chrome-extension, https.
+
+这是由于 Chrome 的安全策略导致的。
+
+解决，通过 terminal 启动：
+
+```shell
+open /Applications/Google\ Chrome.app/ --args --allow-file-access-from-files
+```
