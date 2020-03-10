@@ -42,3 +42,27 @@ apt upgrade
 - 界面直接修改
 
   在`Software Update`中直接修改 server
+
+## 常用命令
+
+### 系统重启
+
+```shell
+shutdown -r now
+```
+
+### 进入、退出 root 模式
+
+```shell
+sudo su
+```
+
+```shell
+exit
+```
+
+### 赋予文件读写权限
+
+```shell
+chmod 777 filename
+```
