@@ -106,7 +106,7 @@ Linux/Unix/Mac: CTRL+D
 
 ## C++ 中头文件<bits/stdc++.h>
 
-它是部分 C++中支持的一个几乎万能的头文件，包含所有的可用到的 C++库函数，如<istream>/<ostream>/<stack>/<queue>
+它是部分 C++中支持的一个几乎万能的头文件，包含所有的可用到的 C++库函数，如`<istream>/<ostream>/<stack>/<queue>`
 
 缺点：
 
