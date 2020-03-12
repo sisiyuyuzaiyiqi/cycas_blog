@@ -86,7 +86,7 @@ using namespace std;
 #include <tgmath.h>　　　//通用类型数学宏
 ```
 
-## include "" 与<>的区别
+## include "" 与`<>`的区别
 
 `#include<>`直接从编译器自带的函数库中寻找文件。
 
@@ -125,3 +125,36 @@ Linux/Unix/Mac: CTRL+D
 - 减少了编写所有必要头文件的所有杂务。
 
 - 不必为使用的每个函数都记住 GNU c++的所有 STL。
+
+## `<string>`
+
+### data 函数、length 函数
+
+`data`：返回一个数组指针，该数组包含与组成字符串对象值的字符相同的字符序列。
+
+`length`：以字节为单位返回字符串的长度。
+
+示例：
+
+```cpp
+using <string>
+using <iostream>
+
+using namespace std;
+
+int main() {
+  string str;
+  cin >> str;
+  char *s = (char *)str.data();
+  for (int i = 0; i < str.length(); i++) {
+		cout << *s << endl;
+		s += 1;
+	}
+  return 0；
+}
+```
+
+| 输入 |       输出       |
+| :--: | :--------------: |
+|  a   |        a         |
+| abcd | a<br>b<br>c<br>d |
