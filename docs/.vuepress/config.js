@@ -33,7 +33,7 @@ module.exports = {
     sidebar: "auto",
     nav: [
       { text: "主页", link: "/" },
-      { text: "coding心得", link: "/coding/" },
+      { text: "笔记", link: "/coding/" },
       { text: "翻译", link: "/translation/" },
       { text: "文摘", link: "/digest/" },
       { text: "标签", link: "/tags" }
