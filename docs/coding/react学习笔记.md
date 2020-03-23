@@ -1,7 +1,7 @@
 ---
 title: react学习笔记
 date: 2020-3-4 9:28
-tags: ["react"]
+tags: ["React"]
 ---
 
 <CreateTime/>

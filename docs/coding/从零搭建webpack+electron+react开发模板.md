@@ -1,7 +1,7 @@
 ---
 title: 从零搭建webpack+electron+react开发模板
 date: 2020-3-5 21:03
-tags: ["Electron", "react"]
+tags: ["Electron", "React"]
 ---
 
 <CreateTime/>
