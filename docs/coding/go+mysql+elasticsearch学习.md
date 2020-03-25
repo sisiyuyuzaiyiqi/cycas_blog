@@ -119,3 +119,45 @@ UPDATE mysql.user SET authentication_string=PASSWORD('root'), PLUGIN='mysql_nati
 ```bash
 sudo systemctl restart mysql.service
 ```
+
+### 新建库
+
+```sql
+create database test;
+```
+
+### 新建用户
+
+注意，首先更改一下密码设置策略方便创建：
+
+```sql
+set global validate_password_policy=0;
+```
+
+创建：
+
+```sql
+create user 'user'@'%' identified by '12345678';
+```
+
+赋权限并更新：
+
+```sql
+grant all privileges on test.* to 'user'@'%';
+flush privileges;
+```
+
+### 外部连虚拟机mysql报错（10061）
+
+```bash
+sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf 
+```
+
+注释掉`bind-address=127.0.0.1`
+
+重启服务：
+
+```bash
+sudo service mysql restart;
+```
+
