@@ -9,6 +9,8 @@ tags: [Go]
 
 ## Go 环境配置
 
+### 安装
+
 基础环境：ubuntu 18.04 desktop
 
 1. 官网下载 go1.14.1.linux-amd64.tar.gz
@@ -45,6 +47,12 @@ source /etc/profile.d/golang.sh
 ```bash
 go version
 ```
+
+### go模块代理
+
+解决某些原因导致的无法正常下载包的问题。
+
+[官网](https://goproxy.io/zh/)
 
 ## mysql 安装
 
