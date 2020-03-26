@@ -66,3 +66,13 @@ exit
 ```shell
 chmod 777 filename
 ```
+
+### 查看、杀死进程
+
+```shell
+ps -aux | grep 进程服务名
+```
+
+```shell
+sudo kill 进程号（PID）
+```
