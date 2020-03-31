@@ -85,3 +85,5 @@ npm config get registry
 npm config set ELECTRON_MIRROR "https://npm.taobao.org/mirrors/electron/"
 npm config set ELECTRON_CUSTOM_DIR "8.0.3"
 ```
+
+此处要注意，阿里源的路径和electron官方的路径有些微区别，官方是v8.0.3，而阿里源不加v
