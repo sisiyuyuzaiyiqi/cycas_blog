@@ -161,3 +161,54 @@ sudo vim /etc/mysql/mysql.conf.d/mysqld.cnf
 sudo service mysql restart;
 ```
 
+## 搭建gin框架
+
+### 初始化go开发环境
+
+
+
+### 初始化gin项目
+
+新建go项目
+
+```bash
+mkdir gin_mysql
+cd gin_mysql
+go mod init gin_mysql
+```
+
+查看mod文件
+
+```bash
+cat go.mod
+```
+
+新建入口文件
+
+```bash
+touch main.go
+```
+
+打开编写代码
+
+```go
+package main
+
+import (
+	"net/http"
+
+	"github.com/gin-gonic/gin"
+)
+
+func main() {
+	router := gin.Default()
+
+	router.GET("/", func(context *gin.Context) {
+		context.String(http.StatusOK, "hello gin")
+	})
+
+	router.Run(":9000")
+}
+```
+
+至此，gin项目初始化完毕
