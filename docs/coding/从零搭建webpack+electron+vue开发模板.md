@@ -27,7 +27,7 @@ npm i -D webpack webpack-cli
 
 由于electron分两个进程的代码，main和renderer。因此我们将webpack的配置文件分成：`webpack.renderer.config.js`和`webpack.main.config.js`
 
-可以把
+并新建`config`目录统一管理。
 
 ### webpack.renderer.config.js
 
