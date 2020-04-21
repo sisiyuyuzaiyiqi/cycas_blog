@@ -1,7 +1,7 @@
 ---
 title: 五、ES入门
 date: 2020-4-20 14:59
-tags: [Go]
+tags: [Go, ES]
 ---
 
 <CreateTime/>
@@ -74,14 +74,14 @@ tar -zxvf openjdk-14.0.1_linux-x64_bin.tar.gz
 配置 JAVA_HOME
 
 ```bash
-vim /etc/profile/java.sh
+vim /etc/profile.d/java.sh
 
 export JAVA_HOME=/usr/local/jdk-14.0.1
 export JRE_HOME=/usr/local/jdk-14.0.1/jre
 export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JRE_HOME/lib
 export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 
-source /etc/profile
+source /etc/profile.d
 ```
 
 验证 java 环境
@@ -96,6 +96,48 @@ java -version
 ./bin/elasticsearch
 ```
 
+::: tip
+如果执行启动命令后无报错，之间显示 killed，可能是虚拟机内存不够，关闭虚拟机，分配内存至 4g 或以上，再启动
+:::
+
 ES 默认在后台运行，打印日志到标准输出（`stout`），按下`Ctrl - C`停止
+
+验证启动成功：
+
+向 localhost:9200 发送 http 请求`GET /`
+
+若成功启动，会返回：
+
+```json
+  "name" : "Cp8oag6",
+  "cluster_name" : "elasticsearch",
+  "cluster_uuid" : "AT69_T_DTp-1qgIJlatQqA",
+  "version" : {
+    "number" : "7.6.2",
+    "build_flavor" : "default",
+    "build_type" : "tar",
+    "build_hash" : "f27399d",
+    "build_date" : "2016-03-30T09:51:41.449Z",
+    "build_snapshot" : false,
+    "lucene_version" : "8.4.0",
+    "minimum_wire_compatibility_version" : "1.2.3",
+    "minimum_index_compatibility_version" : "1.2.3"
+  },
+  "tagline" : "You Know, for Search"
+```
+
+### 以守护进程启动
+
+当以守护进程启动时，在命令行声明`-d`，并使用`-p`选项将进程 id 记录到文件 pid
+
+```bash
+./bin/elasticsearch -d -p pid
+```
+
+关闭：
+
+```bash
+pkill -F pid
+```
 
 _TODO_
