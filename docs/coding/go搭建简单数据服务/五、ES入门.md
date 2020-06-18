@@ -62,26 +62,26 @@ cd elasticsearch-7.6.2/
 注意 ES7.6.2 需要 jdk11 以上，去 orcale 官网下载
 
 ```bash
-mv openjdk-14.0.1_linux-x64_bin.tar.gz /usr/local/
+sudo mv openjdk-14.0.1_linux-x64_bin.tar.gz /usr/local/
 ```
 
 解压
 
 ```bash
-tar -zxvf openjdk-14.0.1_linux-x64_bin.tar.gz
+sudo tar -zxvf openjdk-14.0.1_linux-x64_bin.tar.gz
 ```
 
 配置 JAVA_HOME
 
 ```bash
-vim /etc/profile.d/java.sh
+sudo vim /etc/profile.d/java.sh
 
 export JAVA_HOME=/usr/local/jdk-14.0.1
 export JRE_HOME=/usr/local/jdk-14.0.1/jre
 export CLASSPATH=.:$CLASSPATH:$JAVA_HOME/lib:$JRE_HOME/lib
 export PATH=$PATH:$JAVA_HOME/bin:$JRE_HOME/bin
 
-source /etc/profile.d
+source /etc/profile.d/java.sh
 ```
 
 验证 java 环境
@@ -140,4 +140,113 @@ ES 默认在后台运行，打印日志到标准输出（`stout`），按下`Ctr
 pkill -F pid
 ```
 
-_TODO_
+### 外部连接虚拟机内的 ES
+
+::: tip
+修改 ES 配置文件
+:::
+
+cd 到 ES 根目录的 config 文件夹，修改`elasticsearch.yml`：
+
+Memory 下添加：
+
+```bash
+bootstrap.memory_lock: false
+bootstrap.system_call_filter: false
+```
+
+Network 下添加：
+
+```bash
+network.bind_host: 0.0.0.0
+http.port: 9200
+```
+
+Discovery 下添加：
+
+```bash
+cluster.initial_master_nodes: ["node-1"]
+```
+
+Node 下添加：
+
+```bash
+node.name: node-1
+```
+
+此时还要针对以下问题做些调整：
+
+::: tip
+max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]
+:::
+
+问题翻译过来就是：elasticsearch 用户拥有的内存权限太小，至少需要 262144
+
+解决：
+
+切换到 root 用户
+
+执行命令：
+
+```bash
+sysctl -w vm.max_map_count=262144
+```
+
+查看结果：
+
+```bash
+sysctl -a|grep vm.max_map_count
+```
+
+显示：
+
+```bash
+vm.max_map_count = 262144
+```
+
+上述方法修改之后，如果重启虚拟机将失效，所以：
+
+解决办法：
+
+在 /etc/sysctl.conf 文件最后添加一行
+
+```bash
+vm.max_map_count=262144
+```
+
+即可永久修改
+
+::: tip
+[1]: max file descriptors [4096] for elasticsearch process is too low, increase to at least [65536]
+
+[2]: max number of threads [3818] for user [es] is too low, increase to at least [4096]
+:::
+
+`sudo vim /etc/security/limits.conf`，添加配置：
+
+```bash
+* soft nofile 65535
+* hard nofile 65535
+* soft nproc 65535
+* hard nproc 65535
+```
+
+登出再重进，`ulimit -n`查看是否生效
+
+然而以上方法在带界面的 ubuntu 上无效，请用以下方法：
+
+```bash
+/etc/systemd/system.conf   #modify hard limit
+/etc/systemd/user.conf   #modify soft limit
+```
+
+修改以上两个文件，分别添加配置：
+
+```bash
+DefaultLimitNOFILE=65535
+DefaultLimitNPROC=65535
+```
+
+以上全部改完后，重启虚拟机，在外部访问 `虚拟机地址:9200`，检查是否成功
+
+_全文结束_
