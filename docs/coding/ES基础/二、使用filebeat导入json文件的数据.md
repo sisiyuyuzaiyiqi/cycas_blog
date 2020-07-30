@@ -88,3 +88,115 @@ output.logstash:
 ```shell
 ./filebeat -e -c filebeat.yml -d "publish"
 ```
+
+此时Filebeat会尝试去连接端口5044，也就是Logstash。但在Logstash启用有效的Filebeat插件之前，5044是不会有响应的，所以此时报错很正常。
+
+接下来我们配置Logstash。
+
+一个管道配置文件的框架如下：
+
+```shell
+# The # character at the beginning of a line indicates a comment. Use
+# comments to describe your configuration.
+input {
+}
+# The filter part of this file is commented out to indicate that it is
+# optional.
+# filter {
+#
+# }
+output {
+}
+```
+
+在Logstash的根目录新建一个配置文件`first-pipeline.conf`，把以上的框架复制进去。
+
+在`input`中添加：
+
+```shell
+beats {
+        port => "5044"
+    }
+```
+
+然后，我们再配置输出，我们暂时先不往ES里写，先配置成在命令行打印。在`output`中添加：
+
+```shell
+stdout { codec => rubydebug }
+```
+
+最终，`first-pipeline.conf`配置文件长这样：
+
+```shell
+input {
+    beats {
+        port => "5044"
+    }
+}
+# The filter part of this file is commented out to indicate that it is
+# optional.
+# filter {
+#
+# }
+output {
+    stdout { codec => rubydebug }
+}
+```
+
+我们来校验一下这个配置文件：
+
+```shell
+bin/logstash -f first-pipeline.conf --config.test_and_exit
+```
+
+`--config.test_and_exit`选项会解析你的配置文件，并报告错误。
+
+接下来，我们启动Logstash：
+
+```shell
+bin/logstash -f first-pipeline.conf --config.reload.automatic
+```
+
+`--config.reload.automatic`选项可以开启配置热更新，这样当每次修改配置文件后，不必重启Logstash。
+
+若管道正确工作，可以看到如下的一系列事务：
+
+```shell
+{
+    "@timestamp" => 2017-11-09T01:44:20.071Z,
+        "offset" => 325,
+      "@version" => "1",
+          "beat" => {
+            "name" => "My-MacBook-Pro.local",
+        "hostname" => "My-MacBook-Pro.local",
+         "version" => "6.0.0"
+    },
+          "host" => "My-MacBook-Pro.local",
+    "prospector" => {
+        "type" => "log"
+    },
+    "input" => {
+        "type" => "log"
+    },
+        "source" => "/path/to/file/logstash-tutorial.log",
+       "message" => "83.149.9.216 - - [04/Jan/2015:05:13:42 +0000] \"GET /presentations/logstash-monitorama-2013/images/kibana-search.png HTTP/1.1\" 200 203023 \"http://semicomplete.com/presentations/logstash-monitorama-2013/\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_9_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/32.0.1700.77 Safari/537.36\"",
+          "tags" => [
+        [0] "beats_input_codec_plain_applied"
+    ]
+}
+...
+```
+
+ok，接下来我们准备一批json格式的数据，重新配置Filebeat和Logstash，来导入josn数据。
+
+准备的json数据格式如下即可：
+
+```json
+{k1: v1, k2: v2, k3: v3, ...}
+{k1: v1, k2: v2, k3: v3, ...}
+{k1: v1, k2: v2, k3: v3, ...}
+{k1: v1, k2: v2, k3: v3, ...}
+{k1: v1, k2: v2, k3: v3, ...}
+...
+```
+
