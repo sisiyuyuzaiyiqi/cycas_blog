@@ -16,13 +16,14 @@
 
 [四、第一个 mysql 入门实战项目](go搭建简单数据服务/四、第一个mysql入门实战项目.md)
 
-<!-- 2020-4-16 -->
-
-[五、ES 入门](go搭建简单数据服务/五、ES入门.md)
-
 ## ES study
 
-[使用filebeat导入json文件的数据](使用filebeat导入json文件的数据.md)
+<!-- 2020-4-16 -->
+
+[一、ES 入门](ES基础/一、ES入门.md)
+
+
+[二、使用filebeat导入json文件的数据](ES基础/二、使用filebeat导入json文件的数据.md)
 
 ## coding 实战
 

@@ -1,7 +1,7 @@
 ---
-title: 五、ES入门
+title: 一、ES入门
 date: 2020-4-20 14:59
-tags: [Go, ES]
+tags: [ES]
 ---
 
 <CreateTime/>
