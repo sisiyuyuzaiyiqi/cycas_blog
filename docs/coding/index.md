@@ -22,7 +22,6 @@
 
 [一、ES 入门](ES基础/一、ES入门.md)
 
-
 [二、使用filebeat导入json文件的数据](ES基础/二、使用filebeat导入json文件的数据.md)
 
 ## coding 实战
@@ -80,6 +79,8 @@
 <!-- 2018-6-6 -->
 
 [Ubuntu 常用操作及命令](Ubuntu常用操作及命令.md)
+
+[使用nginx搭建静态web服务](使用nginx搭建静态web服务.md)
 
 ## 计算机专业基础
 
