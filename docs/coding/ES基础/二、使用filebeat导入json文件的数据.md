@@ -2,6 +2,7 @@
 title: 二、使用filebeat导入json文件的数据
 date: 2020-7-30 17:51
 tags: [ES]
+
 ---
 
 <CreateTime/>
@@ -127,7 +128,7 @@ stdout { codec => rubydebug }
 
 最终，`first-pipeline.conf`配置文件长这样：
 
-```shell
+```json
 input {
     beats {
         port => "5044"
@@ -161,7 +162,7 @@ bin/logstash -f first-pipeline.conf --config.reload.automatic
 
 若管道正确工作，可以看到如下的一系列事务：
 
-```shell
+```json
 {
     "@timestamp" => 2017-11-09T01:44:20.071Z,
         "offset" => 325,
@@ -200,3 +201,74 @@ ok，接下来我们准备一批json格式的数据，重新配置Filebeat和Log
 ...
 ```
 
+比如我用的数据如下：
+
+```josn
+{"timestamp":"1591078608","name":"_mta-sts.0-3.duckdns.org","type":"txt","value":"5f1swcMtN6tEOnhAyKjklcCr5p21gxzyhePaxbqAmMU"}
+{"timestamp":"1591079217","name":"_mta-sts.0-games.com","type":"txt","value":"v=spf1 -all"}
+{"timestamp":"1591079184","name":"_mta-sts.0-ml.com","type":"txt","value":"v=spf1 a ?all"}
+...
+```
+
+重新配置filebeat.yml：
+
+```yaml
+filebeat.inputs:
+- type: log
+  paths:
+    - /home/jack/Desktop/es-work/2020-06-02-1591078479-fdns_txt_mx_mta-sts.json
+  json.keys_under_root: true
+  json.add_error_key: true
+output.logstash:
+  hosts: ["localhost:5044"]
+```
+
+以上，其中的paths填写你要导入的json数据文件的绝对路径。
+
+重新配置你的logstash配置文件，我的是之前新建的first-pipeline.conf：
+
+```josn
+# The # character at the beginning of a line indicates a comment. Use
+# comments to describe your configuration.
+input {
+    beats {
+        port => "5044"
+    }
+}
+# The filter part of this file is commented out to indicate that it is
+# optional.
+filter {
+}
+output {
+    elasticsearch {
+        hosts => [ "localhost:9200" ]
+    }
+}
+```
+
+可以看到，我们更改了一下输出，将打印到标准输出（控制台）改成了输出给ES。
+
+当然，如果不放心的话，可以先用以前的，打印到控制台看一下，没问题的话再进ES。
+
+配置完成后，我们按上文说过的，执行：
+
+```bash
+bin/logstash -f first-pipeline.conf --config.reload.automatic
+./filebeat -e -c filebeat.yml -d "publish"
+```
+
+如果不出问题，数据已经规整并进入ES了。我们输入以下命令查看：
+
+```bash
+curl 'localhost:9200/_cat/indices?v'
+```
+
+找到该数据的索引名称，再试着用一下普通检索：
+
+```bash
+curl -XGET 'localhost:9200/logstash-$DATE/_search?pretty&q=name=_mta-sts.0.ciwra.com'
+```
+
+以上语句，logstash-$DATE要替换成你自己的索引名称，`q=`后面的内容是你的查询条件。
+
+若成功，则会返回符合你的查询条件的所有数据。
