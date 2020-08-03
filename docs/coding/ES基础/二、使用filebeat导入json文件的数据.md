@@ -40,7 +40,7 @@ Logstash最早只是为了日志收集使用，但现在它的能力已远不止
 
 ```bash
 cd logstash-7.8.0
-bin/logstash -e input { stdin { } } output { stdout {} }
+bin/logstash -e 'input { stdin { } } output { stdout {} }'
 ```
 
 `-e`标志允许直接从命令行声明配置，以便快速看到效果。上面这个例子中，管道从标准输入中获取输入（`stdin`）,然后以结构化格式传递到标准输出（`stdout`）。
