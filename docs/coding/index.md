@@ -24,6 +24,11 @@
 
 [二、使用filebeat导入json文件的数据](ES基础/二、使用filebeat导入json文件的数据.md)
 
+## Pyhton 基础
+
+[Ubuntu18.04安装Pip](python基础/Ubuntu18.04安装Pip.md)
+[Ubuntu18.04创建Python虚拟环境](python基础/Ubuntu18.04创建Python虚拟环境.md)
+
 ## coding 实战
 
 <!-- 2020-3-23 16:36 -->
