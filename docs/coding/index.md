@@ -24,6 +24,8 @@
 
 [ES原理学习（一）](ES基础/ES原理学习（一）.md)
 
+[ES原理学习（二）](ES基础/ES原理学习（二）.md)
+
 [ES set up](ES基础/ESsetup.md)
 
 [使用filebeat导入json文件的数据](ES基础/使用filebeat导入json文件的数据.md)
