@@ -1,5 +1,5 @@
 ---
-title: 一、ES入门
+title: ESsetup
 date: 2020-4-20 14:59
 tags: [ES]
 ---
