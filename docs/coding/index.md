@@ -26,7 +26,9 @@
 
 [ES原理学习（二）](ES基础/2ES原理学习（二）.md)
 
-[ES set up](ES基础/3ESsetup.md)
+[ES安装（Ubuntu）](ES基础/3ESsetup.md)
+
+[ES安装（docker）](ES基础/3-1ES安装（docker）.md)
 
 [使用filebeat导入json文件的数据](ES基础/4使用filebeat导入json文件的数据.md)
 
