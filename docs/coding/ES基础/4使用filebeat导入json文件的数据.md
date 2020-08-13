@@ -188,7 +188,7 @@ bin/logstash -f first-pipeline.conf --config.reload.automatic
 ...
 ```
 
-ok，接下来我们准备一批json格式的数据，重新配置Filebeat和Logstash，来导入josn数据。
+ok，接下来我们准备一批json格式的数据，重新配置Filebeat和Logstash，来导入json数据。
 
 准备的json数据格式如下即可：
 
@@ -203,7 +203,7 @@ ok，接下来我们准备一批json格式的数据，重新配置Filebeat和Log
 
 比如我用的数据如下：
 
-```josn
+```json
 {"timestamp":"1591078608","name":"_mta-sts.0-3.duckdns.org","type":"txt","value":"5f1swcMtN6tEOnhAyKjklcCr5p21gxzyhePaxbqAmMU"}
 {"timestamp":"1591079217","name":"_mta-sts.0-games.com","type":"txt","value":"v=spf1 -all"}
 {"timestamp":"1591079184","name":"_mta-sts.0-ml.com","type":"txt","value":"v=spf1 a ?all"}
@@ -227,7 +227,7 @@ output.logstash:
 
 重新配置你的logstash配置文件，我的是之前新建的first-pipeline.conf：
 
-```josn
+```json
 # The # character at the beginning of a line indicates a comment. Use
 # comments to describe your configuration.
 input {

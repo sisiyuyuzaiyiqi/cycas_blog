@@ -1,30 +1,11 @@
 module.exports = {
   title: '铁树的博客',
-  head: [
-    // ...
-    [
-      'link',
-      {
-        rel: 'stylesheet',
-        href:
-          'https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css',
-      },
-    ],
-    [
-      'link',
-      {
-        rel: 'stylesheet',
-        href:
-          'https://cdnjs.cloudflare.com/ajax/libs/github-markdown-css/2.10.0/github-markdown.min.css',
-      },
-    ],
-  ],
   description: '这是铁树的新博客，使用VuePress搭建。前端技术博客。',
   // base: "/cycas_blog/",
   locales: {
     '/': {
       lang: 'zh-CN',
-    },
+    }
   },
   head: [
     ['link', { rel: 'icon', href: '/favicon.ico' }],
@@ -43,6 +24,15 @@ module.exports = {
         },
       },
     ],
+    [
+      'vuepress-plugin-mathjax',
+      {
+        target: 'chtml',
+        macros: {
+          '*': '\\times',
+        },
+      },
+    ],
   ],
   themeConfig: {
     lastUpdated: '上次更新',
@@ -57,11 +47,5 @@ module.exports = {
       { text: '文摘', link: '/digest/' },
       { text: '标签', link: '/tags' },
     ],
-  },
-  markdown: {
-    config: (md) => {
-      md.set({ html: true })
-      md.use(require('markdown-it-katex'))
-    },
-  },
+  }
 }
